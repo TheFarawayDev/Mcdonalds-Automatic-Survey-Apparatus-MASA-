@@ -1,0 +1,6 @@
+Flask==2.3.0
+Flask-SocketIO==5.3.4
+selenium==4.15.0
+pillow==10.1.0
+pytesseract==0.3.10
+eventlet==0.33.3
