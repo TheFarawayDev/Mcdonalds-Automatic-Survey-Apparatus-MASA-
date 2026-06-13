@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Happy Meal - McDonald's Survey Automator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🍔 Happy Meal</h1>
+            <p>McDonald's Survey Automation System</p>
+            <div class="disclaimer">
+                ⚠️ FOR EDUCATIONAL PURPOSES ONLY - Do not misuse
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Left Column -->
+            <div class="left-column">
+                <!-- Survey Code Section -->
+                <div class="card">
+                    <h2>📋 Survey Code</h2>
+                    <input type="text" id="surveyCode" placeholder="Enter 26-character survey code" class="input-field">
+                    <div class="button-group">
+                        <button id="uploadReceiptBtn" class="btn-secondary">📷 Upload Receipt</button>
+                        <input type="file" id="receiptInput" accept="image/*" capture="environment" style="display: none;">
+                    </div>
+                    <div id="receiptPreview" class="receipt-preview"></div>
+                </div>
+
+                <!-- Crew Names Section -->
+                <div class="card">
+                    <h2>👥 Crew Member Names</h2>
+                    <div class="warning-badge">⚠️ Minimum {{ min_crew }} required (avoids suspicion)</div>
+                    <textarea id="crewNames" rows="6" placeholder="Enter one name per line&#10;Example:&#10;Marshall&#10;Lucas&#10;Jessica" class="input-field"></textarea>
+                    <div id="crewCount" class="crew-count"></div>
+                </div>
+
+                <!-- Options -->
+                <div class="card">
+                    <h2>⚙️ Options</h2>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="autoScroll"> Auto-scroll progress
+                    </label>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-column">
+                <!-- Controls -->
+                <div class="card">
+                    <h2>🎮 Controls</h2>
+                    <div class="button-group">
+                        <button id="startBtn" class="btn-primary">▶ START AUTOMATION</button>
+                        <button id="stopBtn" class="btn-danger" disabled>⏹ STOP</button>
+                        <button id="clearBtn" class="btn-secondary">🗑 Clear</button>
+                    </div>
+                </div>
+
+                <!-- Progress -->
+                <div class="card">
+                    <h2>📈 Progress</h2>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-stats" id="progressStats">
+                        Ready to start
+                    </div>
+                    <div class="log-container" id="logContainer">
+                        <div class="log-entry system">Ready to begin. Enter survey code and crew names to start.</div>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div class="card" id="resultsCard" style="display: none;">
+                    <h2>✅ Validation Codes</h2>
+                    <div id="resultsList"></div>
+                    <button id="saveResultsBtn" class="btn-secondary">💾 Save Results</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2026 Happy Meal | Educational Use Only | Max 5 surveys/month/restaurant</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        const MIN_CREW = {{ min_crew }};
+    </script>
+</body>
+</html>
